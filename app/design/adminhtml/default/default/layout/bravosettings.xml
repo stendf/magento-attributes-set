@@ -5,7 +5,7 @@
         <reference name="head">
             <action method="addItem">
                 <type>skin_css</type>
-                <name>bravo/bravosettings.css</name>
+                <name>bravo/bravosettings.min.css</name>
             </action>
              <action method="addItem">
                 <type>skin_js</type>
@@ -13,11 +13,7 @@
             </action>
             <action method="addItem">
                 <type>skin_js</type>
-                <name>bravo/settings-attribute-list.php</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>bravo/settings-attribute-list.js</name>
+                <name>bravo/bravosettings.min.js</name>
             </action>
         </reference>
         <reference name="content">
