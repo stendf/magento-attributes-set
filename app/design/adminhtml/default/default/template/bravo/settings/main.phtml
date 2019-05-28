@@ -1,0 +1,121 @@
+<?php
+$setId = Mage::app()->getRequest()->getParam('setid');
+$groupId = Mage::app()->getRequest()->getParam('groupid');
+
+$haveGetParams = ($setId!=null && $groupId!=null) ? true : false;
+
+$frontName = Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName');
+$moduleurl = $frontName . "/bravoindex/";
+
+$attributes = Mage::getModel('eav/entity_attribute')->getCollection();
+$groups     = Mage::getModel('eav/entity_attribute_group')->getCollection();
+$sets       = Mage::getModel('eav/entity_attribute_set')->getCollection();
+?>
+<div>
+
+</div>
+
+<div class="row">
+    <h2>Seleziona set e gruppo</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 110px"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Set</td>
+                <td>
+                    <select id="sets-select" name="set_id" required>
+                        <option value="">Seleziona un set</option>
+                    <?php foreach ($sets as $set): ?>
+                        <?php if ($set['entity_type_id']==4): ?>
+                        <?php $selected = ($set['attribute_set_id']==$setId) ? 'selected' : "{$group['attribute_set_id']}==$setId" ?>
+                        <option value="<?=$set['attribute_set_id']?>" <?=$selected?>><?=$set['attribute_set_name']?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Gruppo</td>
+                <td>
+                    <select id="group-select" name="group_id" disabled required>
+                        <option value=""></option>
+                    <?php foreach ($groups as $group): ?>
+                        <?php $selected = ($group['attribute_group_id']==$groupId) ? 'selected' : '' ?>
+                        <option class="group-opt" data-setid="<?=$group['attribute_set_id']?>" value="<?=$group['attribute_group_id']?>" <?=$selected?>><?=$group['attribute_group_name']?></option>
+                    <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row flex">
+    <div class="col-main">
+        <h2>Lista</h2>
+        <div id="attribute-list-wrapper">
+            <?php
+            $action = $this->getUrl($moduleurl . "savelist");
+            ?>
+            <form method="POST" action="<?=$action?>" id="save-list-form">
+                <div id="attribute-list" class="grid">Seleziona set e gruppo</div>
+                <?php echo $this->getBlockHtml('formkey') ?>
+                <input type="hidden" name="setid" />
+                <input type="hidden" name="groupid" />
+                <button id="save-list-button" type="submit" class="scalable save" style=""><span><span><span>Salva</span></span></span></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-side">
+        <h2>Aggiungi attributo</h2>
+        <form method="POST" action="<?=$this->getUrl($moduleurl . "saveattribute")?>" id="add-attribute-form">
+            <input type="hidden" name="set_id" />
+            <input type="hidden" name="group_id" />
+            <?php echo $this->getBlockHtml('formkey') ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 110px"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Attributo</td>
+                        <td>
+                            <input type="hidden" name="attribute_id" id="attribute-id" required />
+                            <input type="text" id="attribute-input" class="input-text" autocomplete="off" />
+                            <div id="suggestion"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button id="submit-button" type="submit" class="scalable save" style=""><span><span><span>Aggiungi</span></span></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+    </div>
+</div>
+
+<form id="remove-attribute-form" method="POST" action="<?=$this->getUrl($moduleurl . "removeattribute")?>">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <input type="hidden" name="remove_attribute_entity_id" />
+    <input type="hidden" name="setid" />
+    <input type="hidden" name="groupid" />
+</form>
+
+
+<?php if ($haveGetParams):?>
+<script>
+    loadAttributeList();
+</script>
+<?php endif; ?>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bravo_Settings>
+            <version>0.1.0</version>
+        </Bravo_Settings>
+    </modules>
+    <global>
+        <helpers>
+            <settings>
+                <class>Bravo_Settings_Helper</class>
+            </settings>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <bravo_settings before="Mage_Adminhtml">Bravo_Settings_Adminhtml</bravo_settings>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <adminhello>
+                    <file>bravosettings.xml</file>
+                </adminhello>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

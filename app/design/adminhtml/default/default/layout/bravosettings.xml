@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_bravoindex_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>bravo/bravosettings.css</name>
+            </action>
+             <action method="addItem">
+                <type>skin_js</type>
+                <name>bravo/sortable.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>bravo/settings-attribute-list.php</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>bravo/settings-attribute-list.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="templateBlock" template="bravo/settings/main.phtml" />
+        </reference>
+    </adminhtml_bravoindex_index>
+</layout>

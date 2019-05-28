@@ -1,0 +1,27 @@
+<!-- La variabile var1 è accessibile tramite Mage::getStoreConfig('design/brv_settings/var1');   -->
+<config>
+    <sections>
+        <design>
+            <groups>
+                <brv_settings translate="label">
+                    <label>Bravo Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <var1 translate="label">
+                            <label>Variabile 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </var1>
+                    </fields>
+                </brv_settings>
+            </groups>
+        </design>
+    </sections>
+</config>   
